@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("RemindMe");
         setSupportActionBar(toolbar);
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                //seta o pager para a tab que o usuario clicou
                 viewPager.setCurrentItem(tab.getPosition());
             }
 

@@ -27,7 +27,7 @@ public class Task {
         return desricao;
     }
 
-    public Date getLimite() {
-        return limite;
+    public String getLimite() {
+        return limite.toString();
     }
 }

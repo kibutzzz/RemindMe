@@ -28,6 +28,8 @@ public class Task {
     }
 
     public String getLimite() {
-        return limite.toString();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        return simpleDateFormat.format(limite);
     }
 }

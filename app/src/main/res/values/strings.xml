@@ -5,4 +5,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome_da_tarefa">Nome da Tarefa</string>
+    <string name="descri_o_da_tarefa">Descrição da tarefa</string>
+    <string name="_15_07_2018">15/07/2018</string>
 </resources>

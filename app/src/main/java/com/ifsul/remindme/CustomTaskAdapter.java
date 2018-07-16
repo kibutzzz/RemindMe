@@ -40,8 +40,8 @@ public class CustomTaskAdapter extends BaseAdapter {
         Task task = tasks.get(i);
 
         //pegando a referencia de cada view
-        TextView nome = (TextView) itemView.findViewById(R.id.group_name);
-        TextView descricao = (TextView) itemView.findViewById(R.id.group_description);
+        TextView nome = (TextView) itemView.findViewById(R.id.text_view_nome);
+        TextView descricao = (TextView) itemView.findViewById(R.id.text_view_descricao);
         TextView limite = itemView.findViewById(R.id.text_view_date);
 
         //populando as views

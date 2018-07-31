@@ -26,6 +26,7 @@ public class TasksFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
 
@@ -37,7 +38,7 @@ public class TasksFragment extends Fragment {
         return rootView;
     }
 
-    private ArrayList<Task> getAllTasks(){
+    private ArrayList<Task> getAllTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
 
         tasks.add(new Task("Activity de adcionar tarefa", "Adicionar a activity para" +

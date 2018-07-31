@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import sun.net.ResourceManager;
+
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("RemindMe");
+        toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
         tabLayout = findViewById(R.id.tabLayout);

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CustomTaskAdapter extends BaseAdapter {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private final AppCompatActivity activity;
 
     public CustomTaskAdapter(ArrayList<Task> tasks, AppCompatActivity activity) {
@@ -35,6 +35,7 @@ public class CustomTaskAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
+        //TODO implement viewHolder for smoother scrolling
         View itemView = activity.getLayoutInflater()
                 .inflate(R.layout.list_item_task, viewGroup, false);
         Task task = tasks.get(i);
@@ -50,5 +51,10 @@ public class CustomTaskAdapter extends BaseAdapter {
         limite.setText(task.getLimite());
 
         return itemView;
+    }
+
+    public void udpateAdapter(Task t){
+        this.tasks.add(t);
+        notifyDataSetChanged();
     }
 }

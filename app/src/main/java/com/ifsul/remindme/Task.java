@@ -1,5 +1,7 @@
 package com.ifsul.remindme;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,8 +17,14 @@ public class Task {
         try {
             this.limite = new SimpleDateFormat("dd/MM/yyyy").parse(limite);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.i("Task", e.toString());
         }
+    }
+
+    public Task(String nome, String descricao){
+        this.nome = nome;
+        this.desricao = descricao;
+        this.limite = null;
     }
 
     public String getNome() {
@@ -28,8 +36,9 @@ public class Task {
     }
 
     public String getLimite() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        return simpleDateFormat.format(limite);
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//
+//        return simpleDateFormat.format(limite);
+        return null;
     }
 }

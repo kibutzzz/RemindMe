@@ -11,6 +11,8 @@ public class Task {
     private String desricao;
     private Date limite;
 
+    public Task(){};
+
     public Task(String nome, String desricao, String limite) {
         this.nome = nome;
         this.desricao = desricao;

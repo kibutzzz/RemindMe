@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.google.firebase.database.DatabaseReference;
@@ -14,6 +15,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private static AppCompatEditText descricaoEditText;
     private static AppCompatEditText nomeEditText;
     private static AppCompatButton registerButton;
+    private static Toolbar toolbar;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference tasksDatabaseReference;
@@ -22,6 +24,11 @@ public class AddTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         descricaoEditText = findViewById(R.id.edit_text_desc);
         nomeEditText = findViewById(R.id.edit_text_nome);

@@ -56,7 +56,9 @@ public class TasksFragment extends Fragment {
 
     private void getAllTasks() {
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
         tasksDatabaseReferrence = firebaseDatabase.getReference("tasks");
+
 
         tasksDatabaseReferrence.addChildEventListener(new ChildEventListener() {
             @Override

@@ -34,7 +34,7 @@ public class AddTaskActivity extends AppCompatActivity {
         nomeEditText = findViewById(R.id.edit_text_nome);
         registerButton = findViewById(R.id.button_register);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
         tasksDatabaseReference = firebaseDatabase.getReference("tasks");
 
 

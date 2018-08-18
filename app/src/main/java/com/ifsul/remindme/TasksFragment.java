@@ -57,14 +57,13 @@ public class TasksFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        getAllTasks();
+        setDatabaseChangeListener();
         return rootView;
     }
 
-    private void getAllTasks() {
+    private void setDatabaseChangeListener() {
         firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
         tasksDatabaseReferrence = firebaseDatabase.getReference("tasks");
-
 
         tasksDatabaseReferrence.addChildEventListener(new ChildEventListener() {
             @Override

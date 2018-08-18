@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ifsul.remindme.AddTaskActivity">
+    tools:context="com.ifsul.remindme.activities.AddTaskActivity">
 
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:background="?android:attr/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
+        android:theme="?android:attr/actionBarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:title="Adicionar Tarefa"
@@ -29,7 +29,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome da Tarefa"/>
+            android:text="@string/nome_da_tarefa"/>
         <android.support.v7.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descrição da Tarefa"/>
+            android:text="@string/descricao_da_tarefa"/>
         <android.support.v7.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:maxLines="1"
@@ -48,7 +48,7 @@
         <android.support.v7.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cadastrar tarefa"
+            android:text="@string/cadastrar_tarefa"
             android:layout_gravity="end"
             android:id="@+id/button_register"/>
     </android.support.v7.widget.LinearLayoutCompat>

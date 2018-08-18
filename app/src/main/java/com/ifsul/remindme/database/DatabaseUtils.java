@@ -1,4 +1,4 @@
-package com.ifsul.remindme;
+package com.ifsul.remindme.database;
 
 import com.google.firebase.database.FirebaseDatabase;
 

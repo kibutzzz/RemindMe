@@ -1,12 +1,13 @@
-package com.ifsul.remindme;
+package com.ifsul.remindme.adapters;
 
-import android.support.v4.widget.ImageViewCompat;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.ifsul.remindme.Group;
+import com.ifsul.remindme.R;
 
 import java.util.ArrayList;
 
@@ -42,8 +43,8 @@ public class CustomGroupsAdapter extends BaseAdapter {
 
 
         //pegando a referencia de cada view
-        TextView nome = (TextView) itemView.findViewById(R.id.group_name);
-        TextView descricao = (TextView) itemView.findViewById(R.id.group_description);
+        TextView nome = itemView.findViewById(R.id.group_name);
+        TextView descricao = itemView.findViewById(R.id.group_description);
 
         //populando as views
         nome.setText(group.getNome());

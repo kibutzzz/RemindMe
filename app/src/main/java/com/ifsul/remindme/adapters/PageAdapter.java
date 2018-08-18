@@ -1,22 +1,21 @@
-package com.ifsul.remindme;
+package com.ifsul.remindme.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.ifsul.remindme.fragments.GroupsFragment;
+import com.ifsul.remindme.fragments.TasksFragment;
+
 public class PageAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
 
-    PageAdapter(FragmentManager fm, int numOfTabs) {
+    public PageAdapter(FragmentManager fm, int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
     }
 
-    /**
-     * Return the Fragment associated with a specified position.
-     *
-     * @param position
-     */
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {

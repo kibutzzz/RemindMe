@@ -1,13 +1,18 @@
-package com.ifsul.remindme;
+package com.ifsul.remindme.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.ifsul.remindme.adapters.CustomGroupsAdapter;
+import com.ifsul.remindme.Group;
+import com.ifsul.remindme.R;
 
 import java.util.ArrayList;
 
@@ -24,7 +29,7 @@ public class GroupsFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_groups, container, false);

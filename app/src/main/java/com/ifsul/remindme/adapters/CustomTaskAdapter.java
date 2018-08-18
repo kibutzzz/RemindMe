@@ -1,4 +1,4 @@
-package com.ifsul.remindme;
+package com.ifsul.remindme.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ifsul.remindme.R;
+import com.ifsul.remindme.Task;
+import com.ifsul.remindme.TaskViewHolder;
+
 import java.util.List;
 
 public class CustomTaskAdapter extends RecyclerView.Adapter {
@@ -14,7 +18,7 @@ public class CustomTaskAdapter extends RecyclerView.Adapter {
     private List<Task> tasks;
     private Context context;
 
-    CustomTaskAdapter(List<Task> tasks, Context context) {
+    public CustomTaskAdapter(List<Task> tasks, Context context) {
         this.tasks = tasks;
         this.context = context;
     }

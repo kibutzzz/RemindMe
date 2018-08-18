@@ -13,27 +13,22 @@ public class Group {
         this.participates = participates;
     }
 
-    public String getNome() {
-        return nome;
+    public Group(String nome, String descricao){
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+    public Group() {
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNome() {
+        return nome;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public List<String> getParticipates() {
         return participates;
-    }
-
-    public void setParticipates(List<String> participates) {
-        this.participates = participates;
     }
 }

@@ -5,11 +5,11 @@ import android.view.View;
 import android.widget.TextView;
 
 public class TaskViewHolder extends RecyclerView.ViewHolder {
-    final TextView nome;
-    final TextView descricao;
-    final TextView limite;
+    public final TextView nome;
+    public final TextView descricao;
+    public final TextView limite;
 
-    TaskViewHolder(View view){
+    public TaskViewHolder(View view){
         super(view);
         nome = view.findViewById(R.id.text_view_nome);
         descricao = view.findViewById(R.id.text_view_descricao);

@@ -1,60 +1,45 @@
 package com.ifsul.remindme;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class CustomTaskAdapter extends BaseAdapter {
-    private ArrayList<Task> tasks;
-    private final AppCompatActivity activity;
+public class CustomTaskAdapter extends RecyclerView.Adapter {
 
-    public CustomTaskAdapter(ArrayList<Task> tasks, AppCompatActivity activity) {
+    private List<Task> tasks;
+    private Context context;
+
+    CustomTaskAdapter(List<Task> tasks, Context context) {
         this.tasks = tasks;
-        this.activity = activity;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.list_item_task, parent, false);
+
+        return new TaskViewHolder(view);
     }
 
     @Override
-    public int getCount() {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+        TaskViewHolder holder = (TaskViewHolder) viewHolder;
+        Task task = tasks.get(position);
+
+        holder.nome.setText(task.getNome());
+        holder.descricao.setText(task.getDesricao());
+        holder.limite.setText(task.getLimite());
+    }
+
+    @Override
+    public int getItemCount() {
         return tasks.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return tasks.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
-        //TODO implement viewHolder for smoother scrolling
-        View itemView = activity.getLayoutInflater()
-                .inflate(R.layout.list_item_task, viewGroup, false);
-        Task task = tasks.get(i);
-
-        //pegando a referencia de cada view
-        TextView nome = (TextView) itemView.findViewById(R.id.text_view_nome);
-        TextView descricao = (TextView) itemView.findViewById(R.id.text_view_descricao);
-        TextView limite = itemView.findViewById(R.id.text_view_date);
-
-        //populando as views
-        nome.setText(task.getNome());
-        descricao.setText(task.getDesricao());
-        limite.setText(task.getLimite());
-
-        return itemView;
-    }
-
-    public void udpateAdapter(Task t){
-        this.tasks.add(t);
-        notifyDataSetChanged();
     }
 }

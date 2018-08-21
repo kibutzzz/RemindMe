@@ -50,14 +50,10 @@ public class AddTaskActivity extends AppCompatActivity {
                         descricaoEditText.getText().toString());
 
                 tasksDatabaseReference.push().setValue(t);
-                clearFields();
-
+                finish();
             }
         });
     }
 
-    private void clearFields(){
-        nomeEditText.getText().clear();
-        descricaoEditText.getText().clear();
-    }
+
 }

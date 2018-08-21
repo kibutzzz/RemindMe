@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@string/descri_o_da_tarefa"/>
+            android:text="@string/descricao_da_tarefa"/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.AppCompatTextView

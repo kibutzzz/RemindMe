@@ -13,4 +13,5 @@
     <string name="nome_da_tarefa">Nome da Tarefa</string>
     <string name="cadastrar_tarefa">cadastrar tarefa</string>
     <string name="descricao_da_tarefa">Descrição da Tarefa</string>
+    <string name="data_limite">Data Limite</string>
 </resources>

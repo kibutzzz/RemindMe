@@ -48,11 +48,11 @@
             android:layout_height="wrap_content"
             android:maxLines="1" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/data_limite"/>
-        <EditText
+        <android.support.v7.widget.AppCompatEditText
             android:id="@+id/Birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

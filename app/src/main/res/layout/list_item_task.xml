@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="@string/descricao_da_tarefa"/>
+            android:text=""/>
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.AppCompatTextView
@@ -36,5 +36,10 @@
         android:layout_height="match_parent"
         android:text="@string/_15_07_2018"
         android:gravity="center_vertical"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/task_id"/>
 
 </android.support.v7.widget.LinearLayoutCompat>

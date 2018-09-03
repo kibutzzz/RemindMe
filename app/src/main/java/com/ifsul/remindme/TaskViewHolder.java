@@ -10,9 +10,9 @@ import com.ifsul.remindme.activities.TaskDetailActivity;
 
 public class TaskViewHolder extends RecyclerView.ViewHolder {
 
-    public final TextView nome;
-    public final TextView descricao;
-    public final TextView limite;
+    public final AppCompatTextView nome;
+    public final AppCompatTextView descricao;
+    public final AppCompatTextView limite;
     public final AppCompatTextView key;
 
     public TaskViewHolder(View view) {

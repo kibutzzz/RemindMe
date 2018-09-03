@@ -37,9 +37,11 @@ public class CustomTaskAdapter extends RecyclerView.Adapter {
         TaskViewHolder holder = (TaskViewHolder) viewHolder;
         Task task = tasks.get(position);
 
+
         holder.nome.setText(task.getNome());
         holder.descricao.setText(task.getDesricao());
         holder.limite.setText(task.getLimite());
+        holder.key.setText(task.getKey());
     }
 
     @Override

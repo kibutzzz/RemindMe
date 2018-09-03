@@ -16,10 +16,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ifsul.remindme.adapters.CustomTaskAdapter;
-import com.ifsul.remindme.database.DatabaseUtils;
 import com.ifsul.remindme.R;
 import com.ifsul.remindme.Task;
+import com.ifsul.remindme.adapters.CustomTaskAdapter;
+import com.ifsul.remindme.database.DatabaseUtils;
 
 import java.util.ArrayList;
 
@@ -29,6 +29,7 @@ import java.util.ArrayList;
  */
 public class TasksFragment extends Fragment {
 
+    private static String TAG = "LOG_TAG";
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference tasksDatabaseReferrence;
     private ArrayList<Task> tasks;
@@ -60,6 +61,8 @@ public class TasksFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         setDatabaseChangeListener();
+
+
         return rootView;
     }
 
@@ -71,6 +74,7 @@ public class TasksFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Task t = dataSnapshot.getValue(Task.class);
+                t.setKey(dataSnapshot.getKey());
                 tasks.add(t);
                 adapter.notifyDataSetChanged();
             }

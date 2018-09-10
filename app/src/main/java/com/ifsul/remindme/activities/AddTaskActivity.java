@@ -39,7 +39,7 @@ public class AddTaskActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.button_register);
 
         firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
-        tasksDatabaseReference = firebaseDatabase.getReference("tasks");
+        tasksDatabaseReference = firebaseDatabase.getReference("tasks").child(MainActivity.usuario.getUid());
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {

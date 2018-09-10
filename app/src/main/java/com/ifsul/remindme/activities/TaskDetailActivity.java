@@ -32,7 +32,9 @@ public class TaskDetailActivity extends AppCompatActivity {
         descricaoTarefa = findViewById(R.id.descricao_da_tarefa);
 
         String key = getIntent().getStringExtra("key");
-        taskReference = database.getReference("tasks").child(key);
+        taskReference = database.getReference("tasks")
+                .child(MainActivity.usuario.getUid())
+                .child(key);
 
         ValueEventListener eventListener = new ValueEventListener() {
             @Override

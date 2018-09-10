@@ -9,10 +9,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ifsul.remindme.R;
@@ -25,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
     private static View.OnClickListener fabListener;
-    private static String usuario;
-    Toolbar toolbar;
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    PageAdapter pageAdapter;
-    TabItem tabTarefas;
-    TabItem tabGrupos;
-    FloatingActionButton floatingActionButton;
+    public static FirebaseUser usuario;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private PageAdapter pageAdapter;
+    private TabItem tabTarefas;
+    private TabItem tabGrupos;
+    private FloatingActionButton floatingActionButton;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private TabLayout.OnTabSelectedListener onTabSelectedListener;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
                 startActivity(intent);
+
             }
         };
         //adiciona o clickListener ao FAB
@@ -92,12 +96,13 @@ public class MainActivity extends AppCompatActivity {
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                usuario = firebaseAuth.getCurrentUser();
+                if (usuario != null) {
                     //usuero ta logado
-                    Toast.makeText(getBaseContext(), "seja bem-vindo " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+                    viewPager.setAdapter(pageAdapter);
                 } else {
                     //usuero ta desloGADOD+++
+                    viewPager.setAdapter(null);
                     startActivityForResult(
                             // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance()
@@ -120,10 +125,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //se o request for do login
         if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
 
             //se o login foi concluido com sucesso
             if (resultCode == RESULT_OK) {
                 //TODO setar usuario atual
+                Toast.makeText(getBaseContext(), "seja bem-vindo " + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
+
+            } else {
+                if (response == null) {
+                    // User pressed back button
+                    Toast.makeText(getBaseContext(), "Login cancelado", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Toast.makeText(getBaseContext(), "Erro: sem conexão de internet", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Toast.makeText(getBaseContext(), "Erro desconhecido", Toast.LENGTH_LONG).show();
+                Log.e("---", "Sign-in error: ", response.getError());
 
             }
         }
@@ -133,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         firebaseAuth.addAuthStateListener(authStateListener);
-        viewPager.setAdapter(pageAdapter);
+
         tabLayout.addOnTabSelectedListener(onTabSelectedListener);
     }
 
@@ -143,6 +165,5 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         firebaseAuth.removeAuthStateListener(authStateListener);
         tabLayout.removeOnTabSelectedListener(onTabSelectedListener);
-        viewPager.setAdapter(null);
     }
 }

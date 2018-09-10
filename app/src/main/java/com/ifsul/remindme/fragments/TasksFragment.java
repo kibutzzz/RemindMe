@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ifsul.remindme.R;
 import com.ifsul.remindme.Task;
+import com.ifsul.remindme.activities.MainActivity;
 import com.ifsul.remindme.adapters.CustomTaskAdapter;
 import com.ifsul.remindme.database.DatabaseUtils;
 
@@ -34,6 +35,7 @@ public class TasksFragment extends Fragment {
     private DatabaseReference tasksDatabaseReferrence;
     private ArrayList<Task> tasks;
     private CustomTaskAdapter adapter;
+    private ChildEventListener tasksReferenceChildEventListener;
 
 
     public TasksFragment() {
@@ -59,24 +61,14 @@ public class TasksFragment extends Fragment {
                 LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(layoutManager);
-
-        setDatabaseChangeListener();
-
-
-        return rootView;
-    }
-
-    private void setDatabaseChangeListener() {
-        firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
-        tasksDatabaseReferrence = firebaseDatabase.getReference("tasks");
-
-        tasksDatabaseReferrence.addChildEventListener(new ChildEventListener() {
+        tasksReferenceChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Task t = dataSnapshot.getValue(Task.class);
                 t.setKey(dataSnapshot.getKey());
                 tasks.add(t);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
@@ -97,8 +89,35 @@ public class TasksFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
-        });
+        };
+        setDatabaseChangeListener();
 
+
+        return rootView;
+    }
+
+    private void setDatabaseChangeListener() {
+        firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
+        tasksDatabaseReferrence = firebaseDatabase.getReference("tasks").child(MainActivity.usuario.getUid());
+
+
+        tasksDatabaseReferrence.addChildEventListener(tasksReferenceChildEventListener);
+
+    }
+
+    /**
+     * Called when the view previously created by {@link #onCreateView} has
+     * been detached from the fragment.  The next time the fragment needs
+     * to be displayed, a new view will be created.  This is called
+     * after {@link #onStop()} and before {@link #onDestroy()}.  It is called
+     * <em>regardless</em> of whether {@link #onCreateView} returned a
+     * non-null view.  Internally it is called after the view's state has
+     * been saved but before it has been removed from its parent.
+     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        tasksDatabaseReferrence.removeEventListener(tasksReferenceChildEventListener);
 
     }
 }

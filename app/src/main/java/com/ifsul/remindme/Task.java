@@ -1,27 +1,25 @@
 package com.ifsul.remindme;
 
-import android.util.Log;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Task {
     private String nome;
     private String desricao;
-    private Date limite;
+    private String limite;
     private String key;
 
-    public Task(){};
+    public Task() {
+    }
 
-    public Task(String nome, String desricao, String limite) {
+    public Task(String nome, String desricao, int dia, int mes, int ano) {
         this.nome = nome;
         this.desricao = desricao;
-        try {
-            this.limite = new SimpleDateFormat("dd/MM/yyyy").parse(limite);
-        } catch (ParseException e) {
-            Log.i("Task", e.toString());
-        }
+        this.limite = dia + "/" + mes + "/" + ano;
+
+    }
+
+    public Task(String nome, String descricao) {
+        this.nome = nome;
+        this.desricao = descricao;
+        this.limite = null;
     }
 
     public String getKey() {
@@ -33,12 +31,6 @@ public class Task {
         this.key = key;
     }
 
-    public Task(String nome, String descricao){
-        this.nome = nome;
-        this.desricao = descricao;
-        this.limite = null;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -48,10 +40,8 @@ public class Task {
     }
 
     public String getLimite() {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//
-//        return simpleDateFormat.format(limite);
-        return null;
+
+        return limite;
     }
 
 
@@ -59,7 +49,7 @@ public class Task {
     public String toString() {
         String str = "key: " + this.key +
                 "nome: " + this.nome +
-                "descricao: " +this.desricao;
+                "descricao: " + this.desricao;
         return str;
     }
 }

@@ -53,11 +53,12 @@
             android:layout_height="wrap_content"
             android:text="@string/data_limite"/>
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/Birthday"
+            android:id="@+id/edit_text_limite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
+            android:focusableInTouchMode="false"
             />
 
         <android.support.v7.widget.AppCompatButton

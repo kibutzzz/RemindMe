@@ -3,31 +3,24 @@ package com.ifsul.remindme;
 public class Task {
     private String nome;
     private String desricao;
-    private String limite;
     private String key;
+    private String limite;
 
     public Task() {
     }
 
-    public Task(String nome, String desricao, int dia, int mes, int ano) {
+    public Task(String nome, String desricao, String limite) {
         this.nome = nome;
         this.desricao = desricao;
-        this.limite = dia + "/" + mes + "/" + ano;
-
+        this.limite = limite;
     }
 
-    public Task(String nome, String descricao) {
-        this.nome = nome;
-        this.desricao = descricao;
-        this.limite = null;
-    }
 
     public String getKey() {
         return key;
     }
 
     public void setKey(String key) {
-
         this.key = key;
     }
 
@@ -40,7 +33,6 @@ public class Task {
     }
 
     public String getLimite() {
-
         return limite;
     }
 
@@ -52,4 +44,6 @@ public class Task {
                 "descricao: " + this.desricao;
         return str;
     }
+
+
 }

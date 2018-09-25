@@ -59,7 +59,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Task t = new Task(
                         nomeEditText.getText().toString(),
                         descricaoEditText.getText().toString(),
-                        day, month, year);
+                        limiteEditText.getText().toString());
 
                 tasksDatabaseReference.push().setValue(t);
                 finish();

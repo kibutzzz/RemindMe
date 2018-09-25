@@ -27,8 +27,8 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-    private static View.OnClickListener fabListener;
     public static FirebaseUser usuario;
+    private static View.OnClickListener fabListener;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.fab);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
 
         onTabSelectedListener = new TabLayout.OnTabSelectedListener() {
             @Override
@@ -98,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 usuario = firebaseAuth.getCurrentUser();
                 if (usuario != null) {
-                    //usuero ta logado
-                    viewPager.setAdapter(pageAdapter);
+                    onSignInInitialize();
+
                 } else {
-                    //usuero ta desloGADOD+++
-                    viewPager.setAdapter(null);
+                    onSignOutCleanup();
+
                     startActivityForResult(
                             // Get an instance of AuthUI based on the default app
                             AuthUI.getInstance()
@@ -120,6 +120,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void onSignInInitialize() {
+        if (pageAdapter == null) {
+            pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+            viewPager.setAdapter(pageAdapter);
+        }
+    }
+
+    private void onSignOutCleanup() {
+        if(pageAdapter != null) {
+            viewPager.setAdapter(null);
+            pageAdapter = null;
+        }
+    }
+
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        firebaseAuth.addAuthStateListener(authStateListener);
+        tabLayout.addOnTabSelectedListener(onTabSelectedListener);
+        viewPager.setAdapter(pageAdapter);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewPager.setAdapter(null);
+        if(authStateListener != null){
+            firebaseAuth.removeAuthStateListener(authStateListener);
+        }
+        tabLayout.removeOnTabSelectedListener(onTabSelectedListener);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -129,8 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
             //se o login foi concluido com sucesso
             if (resultCode == RESULT_OK) {
-                //TODO setar usuario atual
-                Toast.makeText(getBaseContext(), "seja bem-vindo " + usuario.getDisplayName(), Toast.LENGTH_LONG).show();
+
 
             } else {
                 if (response == null) {
@@ -151,19 +186,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        firebaseAuth.addAuthStateListener(authStateListener);
-
-        tabLayout.addOnTabSelectedListener(onTabSelectedListener);
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        firebaseAuth.removeAuthStateListener(authStateListener);
-        tabLayout.removeOnTabSelectedListener(onTabSelectedListener);
-    }
 }

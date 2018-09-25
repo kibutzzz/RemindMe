@@ -1,9 +1,15 @@
 package com.ifsul.remindme.activities;
 
+import android.app.DatePickerDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -15,12 +21,23 @@ import com.ifsul.remindme.R;
 import com.ifsul.remindme.Task;
 import com.ifsul.remindme.database.DatabaseUtils;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class TaskDetailActivity extends AppCompatActivity {
     private final static String TAG = "LOG_TAG";
     private FirebaseDatabase database;
     private DatabaseReference taskReference;
-    private AppCompatTextView nomeTarefa;
-    private AppCompatTextView descricaoTarefa;
+    private AppCompatEditText nomeTarefa;
+    private AppCompatEditText descricaoTarefa;
+    private AppCompatEditText limiteTarefa;
+    private AppCompatButton atualizarButton;
+    private AppCompatButton concluirButton;
+    private Toolbar toolbar;
+
+    private GregorianCalendar currentDate;
+    private int day, month, year;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +48,15 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         nomeTarefa = findViewById(R.id.nome_da_tarefa);
         descricaoTarefa = findViewById(R.id.descricao_da_tarefa);
+        limiteTarefa = findViewById(R.id.limite_da_tarefa);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+
 
         String key = getIntent().getStringExtra("key");
         taskReference = database.getReference("tasks")
@@ -42,6 +68,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 nomeTarefa.setText(dataSnapshot.getValue(Task.class).getNome());
                 descricaoTarefa.setText(dataSnapshot.getValue(Task.class).getDesricao());
+                limiteTarefa.setText(dataSnapshot.getValue(Task.class).getLimite());
             }
 
             @Override
@@ -52,7 +79,36 @@ public class TaskDetailActivity extends AppCompatActivity {
         };
 
         taskReference.addListenerForSingleValueEvent(eventListener);
-        
+        setDatePicker();
 
+    }
+
+    private void setDatePicker(){
+
+        //pega a data de amanhã
+        currentDate = new GregorianCalendar();
+        currentDate.add(Calendar.DATE, 1);
+
+        day = currentDate.get(GregorianCalendar.DAY_OF_MONTH);
+        month = currentDate.get(GregorianCalendar.MONTH);
+        year = currentDate.get(GregorianCalendar.YEAR);
+        limiteTarefa.setText(day + "/" + (month + 1) + "/" + year);
+
+        limiteTarefa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(TaskDetailActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int y, int m, int d) {
+                        day = d;
+                        month = m + 1;
+                        year = y;
+                        limiteTarefa.setText(day + "/" + month + "/" + year);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
     }
 }

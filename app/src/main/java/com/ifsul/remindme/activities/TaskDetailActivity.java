@@ -37,6 +37,9 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     private GregorianCalendar currentDate;
     private int day, month, year;
+    private String valorInicialNome;
+    private String valorInicialDescricao;
+    private String valorInicialLimite;
 
 
     @Override
@@ -69,6 +72,10 @@ public class TaskDetailActivity extends AppCompatActivity {
                 nomeTarefa.setText(dataSnapshot.getValue(Task.class).getNome());
                 descricaoTarefa.setText(dataSnapshot.getValue(Task.class).getDesricao());
                 limiteTarefa.setText(dataSnapshot.getValue(Task.class).getLimite());
+                valorInicialNome  = nomeTarefa.getText().toString();
+                valorInicialDescricao  = descricaoTarefa.getText().toString();
+                valorInicialLimite  = limiteTarefa.getText().toString();
+
             }
 
             @Override
@@ -80,6 +87,27 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         taskReference.addListenerForSingleValueEvent(eventListener);
         setDatePicker();
+
+        atualizarButton = findViewById(R.id.atualizar_button);
+        atualizarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (anyFieldChanged()){
+                    taskReference.setValue(new Task(
+                            nomeTarefa.getText().toString(),
+                            descricaoTarefa.getText().toString(),
+                            limiteTarefa.getText().toString()));
+                }
+            }
+        });
+
+    }
+
+    private boolean anyFieldChanged() {
+
+        return nomeTarefa.getText().toString().equals(valorInicialNome)
+                || descricaoTarefa.getText().toString().equals(valorInicialDescricao)
+                || limiteTarefa.getText().toString().equals(valorInicialLimite);
 
     }
 

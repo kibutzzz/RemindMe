@@ -69,6 +69,7 @@ public class TasksFragment extends Fragment {
 
                 t.setKey(dataSnapshot.getKey());
                 tasks.add(t);
+                removeDuplicates();
                 adapter.notifyDataSetChanged();
 
             }
@@ -92,20 +93,47 @@ public class TasksFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
+        return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         setDatabaseChangeListener();
 
+        adapter.notifyDataSetChanged();
+    }
 
-        return rootView;
+    @Override
+    public void onPause() {
+        super.onPause();
+        removeDatabaseChangeListener();
+
+    }
+
+    private void removeDuplicates(){
+        int lastIndex = tasks.size()-1;
+        if(lastIndex > 0) {
+            if (tasks.get(lastIndex).getKey().equals(tasks.get(lastIndex - 1).getKey())) {
+                tasks.remove(lastIndex);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void setDatabaseChangeListener() {
         firebaseDatabase = DatabaseUtils.getFirebaseDatabase();
         tasksDatabaseReferrence = firebaseDatabase.getReference("tasks").child(MainActivity.usuario.getUid());
 
-
         tasksDatabaseReferrence.addChildEventListener(tasksReferenceChildEventListener);
 
     }
+    private void removeDatabaseChangeListener(){
+        tasksDatabaseReferrence.removeEventListener(tasksReferenceChildEventListener);
+
+    }
+
 
     /**
      * Called when the view previously created by {@link #onCreateView} has
@@ -119,7 +147,5 @@ public class TasksFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        tasksDatabaseReferrence.removeEventListener(tasksReferenceChildEventListener);
-
     }
 }

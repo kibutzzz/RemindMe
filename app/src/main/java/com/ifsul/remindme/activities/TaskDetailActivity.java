@@ -101,6 +101,15 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
+        concluirButton = findViewById(R.id.concluir_button);
+        concluirButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                taskReference.removeValue();
+                finish();
+            }
+        });
+
     }
 
     private boolean anyFieldChanged() {

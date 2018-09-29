@@ -10,6 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -159,31 +162,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //se o request for do login
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            //se o login foi concluido com sucesso
             if (resultCode == RESULT_OK) {
-
-
-            } else {
-                if (response == null) {
-                    // User pressed back button
-                    Toast.makeText(getBaseContext(), "Login cancelado", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    Toast.makeText(getBaseContext(), "Erro: sem conexão de internet", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                Toast.makeText(getBaseContext(), "Erro desconhecido", Toast.LENGTH_LONG).show();
-                Log.e("---", "Sign-in error: ", response.getError());
-
+                // Sign-in succeeded, set up the UI
+                Toast.makeText(this, "Logado!", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                // Sign in was canceled by the user, finish the activity
+                Toast.makeText(this, "Login cancelado", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout_menu:
+                AuthUI.getInstance().signOut(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }    }
 }

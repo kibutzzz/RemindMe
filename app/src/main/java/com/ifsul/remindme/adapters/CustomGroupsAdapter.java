@@ -5,7 +5,6 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.ifsul.remindme.Group;
 import com.ifsul.remindme.R;
@@ -52,7 +51,6 @@ public class CustomGroupsAdapter extends BaseAdapter {
         descricao.setText(group.getDescricao());
 
         //TODO implementação da imagem
-
 
 
         return itemView;

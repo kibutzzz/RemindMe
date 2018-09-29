@@ -13,10 +13,11 @@ public class Group {
         this.participates = participates;
     }
 
-    public Group(String nome, String descricao){
+    public Group(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
+
     public Group() {
     }
 

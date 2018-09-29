@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.ifsul.remindme.adapters.CustomGroupsAdapter;
 import com.ifsul.remindme.Group;
 import com.ifsul.remindme.R;
+import com.ifsul.remindme.adapters.CustomGroupsAdapter;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ public class GroupsFragment extends Fragment {
         return rootView;
     }
 
-    public ArrayList<Group> getAllGrupos(){
+    public ArrayList<Group> getAllGrupos() {
         ArrayList<Group> groups = new ArrayList<>();
 
         groups.add(new Group("Projeto X", "Grupo do projeto"));

@@ -1,12 +1,11 @@
 package com.ifsul.remindme.activities;
 
 import android.app.DatePickerDialog;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
@@ -55,7 +54,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
@@ -72,9 +71,9 @@ public class TaskDetailActivity extends AppCompatActivity {
                 nomeTarefa.setText(dataSnapshot.getValue(Task.class).getNome());
                 descricaoTarefa.setText(dataSnapshot.getValue(Task.class).getDesricao());
                 limiteTarefa.setText(dataSnapshot.getValue(Task.class).getLimite());
-                valorInicialNome  = nomeTarefa.getText().toString();
-                valorInicialDescricao  = descricaoTarefa.getText().toString();
-                valorInicialLimite  = limiteTarefa.getText().toString();
+                valorInicialNome = nomeTarefa.getText().toString();
+                valorInicialDescricao = descricaoTarefa.getText().toString();
+                valorInicialLimite = limiteTarefa.getText().toString();
 
             }
 
@@ -92,7 +91,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         atualizarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (anyFieldChanged()){
+                if (anyFieldChanged()) {
                     taskReference.setValue(new Task(
                             nomeTarefa.getText().toString(),
                             descricaoTarefa.getText().toString(),
@@ -120,7 +119,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     }
 
-    private void setDatePicker(){
+    private void setDatePicker() {
 
         //pega a data de amanhã
         currentDate = new GregorianCalendar();

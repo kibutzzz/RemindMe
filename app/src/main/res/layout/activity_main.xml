@@ -16,14 +16,14 @@
         android:theme="?android:attr/actionBarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="#BBB"
-        >
+        app:tabTextColor="#BBB">
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabTarefas"
@@ -54,13 +54,12 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_black_24dp"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            app:fabSize="normal"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            />
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add_black_24dp"
+            app:fabSize="normal" />
     </RelativeLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>

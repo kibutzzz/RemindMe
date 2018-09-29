@@ -1,8 +1,8 @@
 package com.ifsul.remindme.activities;
 
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +11,9 @@ import android.widget.DatePicker;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.ifsul.remindme.database.DatabaseUtils;
 import com.ifsul.remindme.R;
 import com.ifsul.remindme.Task;
+import com.ifsul.remindme.database.DatabaseUtils;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -38,7 +38,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
         }
@@ -68,7 +68,7 @@ public class AddTaskActivity extends AppCompatActivity {
     }
 
 
-    private void setDatePicker(){
+    private void setDatePicker() {
 
         //pega a data de amanhã
         currentDate = new GregorianCalendar();
